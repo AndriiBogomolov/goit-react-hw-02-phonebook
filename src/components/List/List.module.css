@@ -3,9 +3,8 @@
     margin-bottom: 0.5rem;
     align-items: right;
     background-color: rgba(254, 254, 254, 0.8);
-    border: none;
     border-radius: 6px;
-    color: #fff;
+    color: rgb(0, 0, 0);
     flex-grow: 1;
     font-family: SFProText-Regular, Helvetica, Arial, sans-serif;
     font-size: 15px;
