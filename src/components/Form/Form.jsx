@@ -1,4 +1,3 @@
-import { nanoid } from 'nanoid';
 import propTypes from 'prop-types';
 import React, { Component } from 'react';
 import css from './Form.module.css';
