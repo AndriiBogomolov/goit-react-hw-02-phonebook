@@ -1,31 +1,36 @@
 import propTypes from 'prop-types';
+import { nanoid } from 'nanoid';
 import React, { Component } from 'react';
-import css from './Form.module.css';
+import css from './ContactForm.module.css';
 
 
-export class Form extends Component {
+export class ContactForm extends Component {
   state = {
     name: '',
     number: '',
   };
 
-  handleChange = e => {
-    const { name, value } = e.target;
+  handleChange = ({ currentTarget: { name, value } }) => {
     this.setState({ [name]: value });
   };
 
   handleSubmit = e => {
     e.preventDefault();
-    const form = e.currentTarget;
-    this.props.handleSubmit(this.state);
-    form.reset();
+
+    const newContact = {
+      id: nanoid(),
+      name: this.state.name,
+      number: this.state.number,
+    };
+
+    this.props.onSubmit(newContact);
+
+    this.setState({ name: '', number: '' });
   };
 
   render() {
-    const { name, number } = this.state;
-
     return (
-      <form className={css.form} onSubmit={this.handleSubmit}>
+      <form className={css.form} onSubmit={this.handleSubmit} autoComplete="off">
         <label className={css.formLabel}>Name </label>
         <input
           className={css.formName}
@@ -33,10 +38,10 @@ export class Form extends Component {
           name="name"
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+          placeholder=" "
           required
-          placeholder="Enter name"
-          value={name}
           onChange={this.handleChange}
+          value={this.state.name}
         />
         <label className={css.formLabel}>Number </label>
         <input
@@ -45,10 +50,10 @@ export class Form extends Component {
           name="number"
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+          placeholder=" "
           required
-          placeholder="Enter phone number"
-          value={number}
           onChange={this.handleChange}
+          value={this.state.number}
         />
         <button className={css.formBtn} type="submit">
           Add contact
@@ -58,6 +63,6 @@ export class Form extends Component {
   }
 }
 
-Form.propTypes = {
-  handleSubmit: propTypes.func.isRequired,
+ContactForm.propTypes = {
+  onSubmit: propTypes.func.isRequired,
 };
