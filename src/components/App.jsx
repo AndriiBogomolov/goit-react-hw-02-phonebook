@@ -70,7 +70,7 @@ export class App extends Component {
           contacts={this.filterContacts()}
             deleteContact={this.deleteContact}
         />
-        <Notification />
+        {this.state.contacts.length === 0 && (<Notification />)}
       </div>
     );
   }
