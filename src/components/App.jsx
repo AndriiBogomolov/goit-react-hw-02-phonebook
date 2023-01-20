@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-// import { nanoid } from 'nanoid';
-import { Filter } from './Filter/Filter';
-import { ContactForm } from './ContactForm/ContactForm';
-import { ContactList } from './ContactList/ContactList';
+import Filter from './Filter';
+import ContactForm from './ContactForm';
+import ContactList from './ContactList';
+import Notification from "./Notification";
 
 export class App extends Component {
   state = {
@@ -42,6 +42,7 @@ export class App extends Component {
   deleteContact = contactId => {
     this.setState(({ contacts }) => ({
       contacts: contacts.filter(({ id }) => id !== contactId),
+      
     }));
   };
 
@@ -68,7 +69,8 @@ export class App extends Component {
         <ContactList
           contacts={this.filterContacts()}
             deleteContact={this.deleteContact}
-          />
+        />
+        <Notification />
       </div>
     );
   }

@@ -1,11 +1,12 @@
 import propTypes from 'prop-types';
 import css from './ContactList.module.css';
+// import Notification from './Notification';
 
 export const ContactList = ({ contacts, deleteContact }) => (
-  <div className={css.wraperContactList}>
+  <div>
     <ul className={css.contactList}>
       {contacts.map((contact, id) => (
-        <li key={id} className={css.contactListItem}>
+        <li key={id} className={css.contactList}>
           {contact.name}: {contact.number}
           <button
             type="button"
@@ -20,6 +21,7 @@ export const ContactList = ({ contacts, deleteContact }) => (
   </div>
 );
 
+
 ContactList.propTypes = {
   contact: propTypes.shape(
     propTypes.exact({
@@ -30,3 +32,6 @@ ContactList.propTypes = {
   ),
   deleteContact: propTypes.func.isRequired,
 };
+
+
+export default ContactList;
